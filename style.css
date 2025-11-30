@@ -23,19 +23,70 @@
 /*  Global Layout Styles     */
 /* ========================= */
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: var(--bg-dark);
   color: var(--text-light);
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* Contain main content so it is not edge to edge on big screens */
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1em;
+  gap: 1em;
+}
+
+/* Columns used on some pages */
+
+.sidebar,
+.content,
+.extras {
+  margin: 0;
+}
+
+.sidebar {
+  flex: 1 1 220px;
+}
+
+.content {
+  flex: 2 1 460px;
+}
+
+.extras {
+  flex: 1 1 220px;
+}
+
+/* Stack nicely on small screens */
+
+@media (max-width: 800px) {
+  main {
+    flex-direction: column;
+  }
+
+  .sidebar,
+  .content,
+  .extras {
+    flex: 1 1 100%;
+  }
 }
 
 /* ========================= */
-/*     Header & Footer       */
+/*     Header and Footer     */
 /* ========================= */
 
-header, footer {
+header,
+footer {
   background: var(--bg-dark);
   border: 1px solid var(--neon-blue);
   text-align: center;
@@ -44,26 +95,34 @@ header, footer {
   box-shadow: 0 0 6px rgba(0, 229, 255, 0.35);
 }
 
+header h1 {
+  margin: 0;
+}
+
+header p {
+  margin: 0.25em 0 0;
+  color: var(--text-muted);
+}
+
 /* ========================= */
-/* Navigation                */
+/*        Navigation         */
 /* ========================= */
 
 nav {
   display: flex;
   justify-content: space-around;
-  padding: 1em;
-    background-image: url("assets/images/backgrounds/circuits.png");
-  background-repeat: repeat-x;
-  background-position: center;
-    background-size: 60% auto;
+  align-items: center;
+  padding: 0.75em 1em;
+  background: var(--bg-panel);
   border-bottom: 2px solid var(--neon-blue);
-    box-shadow: 0 0 8px rgba(0, 229, 255, 0.35);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.35);
 }
 
 nav a {
   color: var(--neon-blue-soft);
   text-decoration: none;
   font-weight: bold;
+  font-size: 0.95rem;
   transition: 0.25s ease;
 }
 
@@ -72,30 +131,21 @@ nav a:hover {
   text-shadow: 0 0 8px var(--neon-green);
 }
 
-/* ========================= */
-/*   Main Structure          */
-/* ========================= */
+/* Wrap nav on small screens */
 
-main {
-  display: flex;
-  padding: 1em;
-}
-
-.sidebar, .content, .extras {
-  flex: 1;
-  margin: 0 1em;
-}
-
-.content {
-  flex: 2;
+@media (max-width: 600px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 0.5em 1em;
+  }
 }
 
 /* ========================= */
-/*     Content Sections      */
+/*       Sections            */
 /* ========================= */
 
 section {
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
   padding: 1em;
   background: var(--bg-panel);
   border: 1px solid var(--neon-blue);
@@ -109,8 +159,16 @@ section:hover {
   box-shadow: 0 0 10px rgba(0, 229, 255, 0.45);
 }
 
+section h2 {
+  margin-top: 0;
+}
+
+section h3 {
+  margin-top: 0;
+}
+
 /* ========================= */
-/*    Placeholder Boxes      */
+/*   Placeholder Elements    */
 /* ========================= */
 
 .placeholder {
@@ -123,8 +181,11 @@ section:hover {
   justify-content: center;
   color: var(--neon-green);
   font-weight: bold;
+  font-size: 0.95rem;
   transition: 0.25s ease;
   border-radius: 4px;
+  margin-top: 0.5em;
+  margin-bottom: 0.75em;
 }
 
 .placeholder:hover {
@@ -132,23 +193,22 @@ section:hover {
 }
 
 /* ========================= */
-/*         Footer            */
+/*      Footer Columns       */
 /* ========================= */
 
 .footer-columns {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  padding: 2em 1em;
+  padding: 2em 1em 1em;
   border-top: 1px solid var(--neon-blue);
   background: var(--bg-dark);
   color: var(--text-light);
 }
 
 .footer-column {
-  flex: 1;
-  min-width: 200px;
-  margin: 1em;
+  flex: 1 1 220px;
+  margin: 0.5em;
   padding: 1em;
   background: var(--bg-dark);
   border: 1px solid var(--purple-uv);
@@ -165,11 +225,14 @@ section:hover {
 .footer-column ul {
   list-style: none;
   padding: 0;
+  margin: 0.5em 0 0;
 }
 
 .footer-column ul li {
-  margin: 0.5em 0;
+  margin: 0.4em 0;
 }
+
+/* If you later make these links, they will look right */
 
 .footer-column ul li a {
   color: var(--neon-blue-soft);
@@ -180,4 +243,68 @@ section:hover {
 .footer-column ul li a:hover {
   color: var(--neon-green);
   text-shadow: 0 0 6px var(--neon-green);
+}
+
+/* ========================= */
+/* History page subnav       */
+/* ========================= */
+
+.subnav {
+  margin-bottom: 2em;
+}
+
+.subnav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+  margin-top: 0.75em;
+}
+
+.subnav-links a {
+  padding: 0.5em 1em;
+  border: 1px solid var(--neon-blue);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--neon-blue-soft);
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: 0.25s ease;
+}
+
+.subnav-links a:hover {
+  background: var(--bg-panel);
+  color: var(--neon-green);
+  text-shadow: 0 0 6px var(--neon-green);
+}
+
+/* ========================= */
+/* Champions table           */
+/* ========================= */
+
+.champions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  font-size: 0.95rem;
+}
+
+.champions-table th,
+.champions-table td {
+  border: 1px solid var(--neon-blue);
+  padding: 0.5em;
+  text-align: left;
+}
+
+.champions-table thead {
+  background: var(--bg-panel);
+  font-weight: bold;
+}
+
+/* Improve readability on small screens */
+
+@media (max-width: 600px) {
+  .champions-table th,
+  .champions-table td {
+    font-size: 0.85rem;
+  }
 }
